@@ -1,3 +1,6 @@
+<!-- Voeg het functies.php bestand toe -->
+<?php include 'includes/functions.php'; ?>
+
 <!-- Voeg de header van de website toe aan index.php -->
 <?php include 'includes/interface/header.php'; ?>  
 
