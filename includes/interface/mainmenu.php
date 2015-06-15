@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">SuperDesk - <?php echo ucfirst($_GET['pagina']); ?></a>
+      <a class="navbar-brand" href="#">SuperDesk - <?php echo str_replace('_', ' ', ucfirst($_GET['pagina'])); ?></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
