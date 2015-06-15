@@ -1,84 +1,163 @@
 <html>
 	<head>
-		<title>SuperDesk - Scholengemeenschap de Hondsrug</title>
+		<title>SuperDesk - Inloggen</title>
 		<style>
 			body {
-			    background: url(http://habrastorage.org/files/c9c/191/f22/c9c191f226c643eabcce6debfe76049d.jpg);
+			    padding-top: 90px;
 			}
-			
-			.jumbotron {
-				text-align: center;
-				width: 30rem;
-				border-radius: 0.5rem;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				position: absolute;
-				margin: 4rem auto;
+			.panel-login {
+				border-color: #ccc;
+				-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+				-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+				box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+			}
+			.panel-login>.panel-heading {
+				color: #00415d;
 				background-color: #fff;
-				padding: 2rem;
+				border-color: #fff;
+				text-align:center;
 			}
-			
-			.container .glyphicon-list-alt {
-				font-size: 10rem;
-				margin-top: 3rem;
-				color: #f96145;
-			}
-			
-			input {
-				width: 100%;
-				margin-bottom: 1.4rem;
-				padding: 1rem;
-				background-color: #ecf2f4;
-				border-radius: 0.2rem;
-				border: none;
-			}
-			h2 {
-				margin-bottom: 3rem;
+			.panel-login>.panel-heading a{
+				text-decoration: none;
+				color: #666;
 				font-weight: bold;
-				color: #ababab;
+				font-size: 15px;
+				-webkit-transition: all 0.1s linear;
+				-moz-transition: all 0.1s linear;
+				transition: all 0.1s linear;
 			}
-			.btn {
-				border-radius: 0.2rem;
+			.panel-login>.panel-heading a.active{
+				color: #029f5b;
+				font-size: 18px;
 			}
-			.btn .glyphicon {
-				font-size: 3rem;
+			.panel-login>.panel-heading hr{
+				margin-top: 10px;
+				margin-bottom: 0px;
+				clear: both;
+				border: 0;
+				height: 1px;
+				background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+				background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+				background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+				background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+			}
+			.panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+				height: 45px;
+				border: 1px solid #ddd;
+				font-size: 16px;
+				-webkit-transition: all 0.1s linear;
+				-moz-transition: all 0.1s linear;
+				transition: all 0.1s linear;
+			}
+			.panel-login input:hover,
+			.panel-login input:focus {
+				outline:none;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none;
+				border-color: #ccc;
+			}
+			.btn-login {
+				background-color: #59B2E0;
+				outline: none;
 				color: #fff;
+				font-size: 14px;
+				height: auto;
+				font-weight: normal;
+				padding: 14px 0;
+				text-transform: uppercase;
+				border-color: #59B2E6;
 			}
-			.full-width {
-				background-color: #8eb5e2;
-				width: 100%;
-				-webkit-border-top-right-radius: 0;
-				-webkit-border-bottom-right-radius: 0;
-				-moz-border-radius-topright: 0;
-				-moz-border-radius-bottomright: 0;
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
+			.btn-login:hover,
+			.btn-login:focus {
+				color: #fff;
+				background-color: #53A3CD;
+				border-color: #53A3CD;
+			}
+			.forgot-password {
+				text-decoration: underline;
+				color: #888;
+			}
+			.forgot-password:hover,
+			.forgot-password:focus {
+				text-decoration: underline;
+				color: #666;
 			}
 			
-			.box {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				margin-bottom: 3rem;
-				margin-left: 3rem;
-				margin-right: 3rem;
+			.btn-register {
+				background-color: #1CB94E;
+				outline: none;
+				color: #fff;
+				font-size: 14px;
+				height: auto;
+				font-weight: normal;
+				padding: 14px 0;
+				text-transform: uppercase;
+				border-color: #1CB94A;
+			}
+			.btn-register:hover,
+			.btn-register:focus {
+				color: #fff;
+				background-color: #1CA347;
+				border-color: #1CA347;
 			}
 		</style>
-	</head>
+		<!-- Bootstrap core CSS -->
+	    <link href="../css/bootstrap.css" rel="stylesheet">
 	
+	    <!-- Custom styles for this template -->
+	    <link href="../css/dashboard.css" rel="stylesheet">
+	</head>	
 <body>
-<div class="jumbotron">
-  <div class="container">
-    <span class="glyphicon glyphicon-list-alt"></span>
-    <h2>Calendar</h2>
-    <div class="box">
-        <input type="text" placeholder="username">
-	    <input type="password" placeholder="password">
-	    <button class="btn btn-default full-width"><span class="glyphicon glyphicon-ok"></span></button>
-    </div>
-  </div>
+<div class="container">
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel panel-login">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-12">
+						<img src="logo.jpg" width="100%">
+					</div>
+				</div>
+				<hr>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<form id="login-form" action="#" method="post" role="form" style="display: block;">
+							<div class="form-group">
+								<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Gebruikersnaam" value="">
+							</div>
+							<div class="form-group">
+								<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Wachtwoord">
+							</div>
+							<div class="form-group text-center">
+								<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+								<label for="remember"> Inloggegevens onthouden</label>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-sm-6 col-sm-offset-3">
+										<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Inloggen">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="text-center">
+											<a href="vergeten.php" tabindex="5" class="forgot-password">Wachtwoord vergeten</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </div>
 </body>
 
