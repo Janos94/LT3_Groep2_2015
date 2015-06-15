@@ -23,6 +23,8 @@
 </div>
 </div>
 
+<?php sortByGroup(array("Openstaande incidenten", "In wacht", "In behandeling", "Gesloten")); ?>
+<br>
 <div class="table-responsive">
 <table class="table table-striped">
   <thead>
@@ -83,6 +85,27 @@
       <td>Werkstations van Acer geven defect</td>
       <td>Systeem</td>
       <td>13-06-2015 18:25</td>
+    </tr>
+    <tr class="warning">
+      <td>INCI-13062015-003</td>
+      <td>Openstaande</td>
+      <td>Werkstation GSV-0015 is kapot</td>
+      <td>P. de Vries</td>
+      <td>13-06-2015 18:21</td>
+    </tr>
+    <tr class="warning">
+      <td>INCI-13062015-003</td>
+      <td>Openstaande</td>
+      <td>Werkstation GSV-0015 is kapot</td>
+      <td>P. de Vries</td>
+      <td>13-06-2015 18:21</td>
+    </tr>
+    <tr class="warning">
+      <td>INCI-13062015-003</td>
+      <td>Openstaande</td>
+      <td>Werkstation GSV-0015 is kapot</td>
+      <td>P. de Vries</td>
+      <td>13-06-2015 18:21</td>
     </tr>
     <tr class="warning">
       <td>INCI-13062015-003</td>

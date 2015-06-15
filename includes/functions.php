@@ -46,4 +46,24 @@
 		</nav>
 		<?php
 	}
+	
+	/*
+		@author Jan Osinga
+ 		@version 15-6-2015
+		@param $groepen: $grpepen Vul hier een array in me elementen waarop gesorteerd kan worden
+		@description: Functie voor het aanmaken van button waarop gesorteerd kan worden binnen een pagina, bijv sorteren op openstaande incidenten of in wacht.
+	*/
+	function sortByGroup($groepen) {
+		?>
+		<div class="btn-group" role="group" aria-label="Sortering">
+			<?php 
+				$max = sizeof($groepen);
+				for($i = 0; $i != $max; $i++){ ?>
+					<a href="?pagina=<?php echo $_GET['pagina']; ?>&sortBy=<?php echo str_replace(' ', '_', strtolower($groepen[$i])); ?>">
+					<button type="button" class="btn btn-default <?php if (str_replace(' ', '_', strtolower($groepen[$i])) == $_GET['sortBy']) { echo "active"; } ?>"><?php echo $groepen[$i]; ?></button>
+					</a>
+			<?php } ?>
+		</div>
+		<?php
+	}
 ?>
