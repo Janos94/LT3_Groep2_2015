@@ -1,8 +1,8 @@
 <?php 
 	// Database connectie met localhost
 	$dbhost = "localhost"; 
-	$dbuser = "lt3"; 
-	$dbpass = "supermanisgay!"; 
+	$dbuser = ""; // Verwijderd voor veiligheid
+	$dbpass = ""; // Verwijderd voor veiligheid
 	$dbname = "superdesk"; 
 	$db = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 	
