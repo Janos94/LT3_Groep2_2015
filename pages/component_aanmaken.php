@@ -1,4 +1,4 @@
-<h1 class="page-header">Incident aanmaken <small><span class="label label-primary">INCIDENT-15062015-003</span></small></h1>
+<h1 class="page-header">Incident aanmaken <small><span class="label label-primary">INCI-15062015-003</span></small></h1>
 <div class="btn-group btn-group-lg" role="group" aria-label="Incident aanmaken-beheer">
   <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-saved"></span></button>
   <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
@@ -226,7 +226,7 @@
 <div class="col-xs-12 col-sm-6 timeline">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Acties</h3>
+      <h3 class="panel-title">Tijdlijn</h3>
     </div>
     <div class="panel-body">
       <div class="qa-message-list" id="wallmessages">					

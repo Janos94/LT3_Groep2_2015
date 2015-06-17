@@ -1,11 +1,11 @@
-<h1 class="page-header">Incident aanmaken <small><span class="label label-primary">INCIDENT-15062015-003</span></small></h1>
+<h1 class="page-header">Wijziging aanmaken <small><span class="label label-warning">CHANGE-15062015-001</span></small></h1>
 <div class="btn-group btn-group-lg" role="group" aria-label="Incident aanmaken-beheer">
   <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-saved"></span></button>
   <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
 </div>
 <br><br>
 <div class="row incident_field">  
-<!-- Aanmelder incident -->
+<!-- Aanmelder wijziging -->
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 incident_field">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -60,32 +60,23 @@
   </div>
 </div>
 
-<!-- Type incident -->
+<!-- Type wijziging en urgentie -->
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 incident_field">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Soort melding/incident</h3>
+      <h3 class="panel-title">Wijziging / Urgentie</h3>
     </div>
     <div class="panel-body">
-        <!-- Categorie --> 
+        <!-- Wijziging voor --> 
         <div class="form-group">
           <div class="input-group">
-            <div class="input-group-addon">Aangemeld via</div>
+            <div class="input-group-addon">Wijziging voor</div>
             <select class="form-control">
-              <option>Telefoon</option>
-              <option>E-mail</option>
-              <option>Mondeling</option>
-            </select>
-          </div>
-        </div>
-        <!-- Categorie --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Soort melding/incident</div>
-            <select class="form-control">
-              <option>Storing</option>
-              <option>Probleem</option>
-              <option>Opmerking</option>
+              <option>Hardware</option>
+              <option>Software</option>
+              <option>Infrastructuur</option>
+              <option>Nieuwe hardware</option>
+              <option>Nieuwe software</option>
             </select>
           </div>
         </div>
@@ -111,35 +102,23 @@
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 incident_field">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Object</h3>
+      <h3 class="panel-title">Uitvoering</h3>
     </div>
     <div class="panel-body">
         <!-- Object type --> 
         <div class="form-group">
           <div class="input-group">
-            <div class="input-group-addon">Object type</div>
-            <select class="form-control">
-              <option>Werkstation</option>
-              <option>Server</option>
-              <option>Modem</option>
-              <option>Router</option>
-              <option>Switch</option>
-              <option>Printer</option>
-              <option>Firewall</option>
-            </select>
+            <div class="input-group-addon">Datum uitvoering</div>
+            <input type="date" class="form-control" id="datum_verwerking" placeholder="Bv. 16-06-2015">
           </div>
         </div>
-        <!-- Object-id --> 
+        <!-- Object type --> 
         <div class="form-group">
           <div class="input-group">
-            <div class="input-group-addon">Object-ID</div>
-            <select class="form-control">
-              <option>GSV-003</option>
-              <option>MDM-005</option>
-              <option>SRV-2359</option>
-            </select>
+            <div class="input-group-addon">Tijd uitvoering</div>
+            <input type="time" class="form-control" id="datum_verwerking" placeholder="Bv. 16:15">
           </div>
-        </div>        
+        </div>       
         <!-- Locatie --> 
         <div class="form-group">
           <div class="input-group">
@@ -201,7 +180,7 @@
 <div class="col-xs-12 col-sm-6 incident_field">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Beschrijving</h3>
+      <h3 class="panel-title">Beschrijving wijziging</h3>
     </div>
     <div class="panel-body">
           
@@ -214,7 +193,7 @@
     </div>
     <div class="form-group">
       <div class="input-group"> 
-        <div class="input-group-addon">Probleem</div>
+        <div class="input-group-addon">Beschijving</div>
         <textarea class="form-control" rows="5"></textarea>
       </div>    
     </div>     

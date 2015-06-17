@@ -18,11 +18,13 @@
 </div>
 <div class="col-xs-6 col-sm-3 placeholder">
   <h1>14</h1>
-  <h4>Gesloten</h4>
+  <h4>Opgelost</h4>
   <span class="text-muted">Afgehandeld of gesloten problemen</span>
 </div>
 </div>
 
+<?php sortByGroup(array("Geïdentificeerd", "Bekende problemen", "In behandeling", "Opgelost")); ?>
+<br>
 <div class="table-responsive">
 <table class="table table-striped">
   <thead>
@@ -80,3 +82,5 @@
   </tbody>
 </table>
 </div>
+
+<?php pagination($_GET['p']); ?>

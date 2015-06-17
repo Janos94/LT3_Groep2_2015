@@ -1,3 +1,41 @@
+<?php
+	
+	// INLOGFUNCTIE
+	include '../includes/db.php';	
+	if (isset($_POST['login-submit'])){
+		// Encrypt het ingevoerde wachtwoord zodat dit vergeleken kan worden met de DB
+		$username = $_POST['username'];
+		$password = crypt($_POST['password'], '$2a$10$1qAz2wSx3eDc4rFv5tGb5t');
+		// Zet query in een variabele
+		$query = "SELECT * FROM `gebruikers` ";
+		$query .= "JOIN gebruikers_has_rechten ON gebruikers.Medewerker_ID=gebruikers_has_rechten.gebruikers_Medewerker_ID ";
+		$query .= "WHERE gebruikers.Medewerker_ID=".$username." AND Password='".$password."';";
+		// Voer de query uit op de database en zet het in de variabele $query
+		$get = mysqli_query($db, $query);
+		// Haal op hoeveel resultaten opgehaald zijn. 
+		$result = mysqli_num_rows($get);
+		// Haal overige gegevens op
+		$data = mysqli_fetch_assoc($get);
+		// Zet de rechten klasse in een variabele
+		$rights = $data['rechten_Rechten_ID'];
+		
+		if ($result == 1){
+			// Als het aantal resultaten van de query niet meer of minder dan 1 is dan de sessie met gegevens starten
+			session_start();
+			$_SESSION['username'] = $username;
+			$_SESSION['rights'] = $rights;
+			
+			// Maak een nametag
+			$_SESSION['naam'] = $data['Achternaam'].", ".$data['Voornaam'];
+			
+			// Doorsturen naar beheerpagina
+			header('location: ../?pagina=overzicht');
+			exit();
+		} else { header('location: ?status=mislukt'); }
+		
+	}	
+?>
+
 <html>
 	<head>
 		<title>SuperDesk - Inloggen</title>
@@ -124,9 +162,15 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-12">
-						<form id="login-form" action="#" method="post" role="form" style="display: block;">
+						<?php if (isset($_GET['status']) && ($_GET['status'] == "mislukt")){
+							?><div class="alert alert-danger" role="alert"><strong>Er is iets mis gegaan!</strong> De ingevoerde gegevens kloppen niet.</div><?php
+						}?>
+						<?php if (isset($_GET['status']) && ($_GET['status'] == "rights")){
+							?><div class="alert alert-warning" role="alert"><strong>Je hebt onvoldoende rechten!</strong> Je account is niet geauthoriseerd hier op in te loggen.</div><?php
+						}?>
+						<form id="login-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" role="form" style="display: block;">
 							<div class="form-group">
-								<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Gebruikersnaam" value="">
+								<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Medewerkers ID">
 							</div>
 							<div class="form-group">
 								<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Wachtwoord">

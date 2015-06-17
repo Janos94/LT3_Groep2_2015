@@ -15,6 +15,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-plus"></span></a>
           <ul class="dropdown-menu" role="menu">
             <?php menuItem("Incident aanmaken"); ?>
+            <?php menuItem("Wijziging aanmaken"); ?>
             <?php menuItem("Component aanmaken"); ?>
           </ul>
         </li>    
@@ -26,10 +27,19 @@
             <?php menuItem("Problemen"); ?>
             <?php menuItem("Configuratie"); ?>
           </ul>
-        </li>            
-        <?php menuItem("Instellingen"); ?>           
-        <?php menuItem("Help"); ?>
-        <?php menuItem("Uitloggen"); ?>
+        </li>     
+         
+        
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-user"></span><?php session_start(); echo $_SESSION['naam']; ?> <b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="?pagina=help"><span class="glyphicon glyphicon-user"></span>Help</a></li>
+            <li><a href="?pagina=instellingen"><span class="glyphicon glyphicon-cog"></span>Instellingen</a></li>
+            <li class="divider"></li>
+            <li><a href="../../pages/uitloggen.php"><span class="glyphicon glyphicon-off"></span>Uitloggen</a></li>
+          </ul>
+        </li>
+        
       </ul>
       <form class="navbar-form navbar-right">
         <input type="text" class="form-control" placeholder="Zoeken naar...">

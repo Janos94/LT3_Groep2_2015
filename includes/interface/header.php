@@ -1,3 +1,11 @@
+<?php 
+  session_start();
+  if(!isset($_SESSION['username']) || (1 > $_SESSION['rights'])){
+    header('location: ../../inloggen/?status=rights');
+    exit();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
