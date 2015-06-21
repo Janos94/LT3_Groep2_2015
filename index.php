@@ -1,8 +1,16 @@
-<!-- Voeg het functies.php bestand toe -->
-<?php include 'includes/functions.php'; ?>
-
+<?php 
+  session_start();
+  if(!isset($_SESSION['username']) || (2 >= $_SESSION['rights'])){
+    header('location: ../../inloggen/?status=rights');
+    exit();
+  }
+?>
 <!-- Voeg de header van de website toe aan index.php -->
 <?php include 'includes/interface/header.php'; ?>  
+
+<!-- Voeg het functies.php bestand toe -->
+<?php include 'includes/functions.php'; ?>
+<?php include 'includes/db.php'; ?>
 
   <body>
   <!-- Voeg het hoofdmenu van de website toe aan index.php -->

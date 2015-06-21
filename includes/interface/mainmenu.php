@@ -31,7 +31,7 @@
          
         
         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <span class="glyphicon glyphicon-user"></span><?php session_start(); echo $_SESSION['naam']; ?> <b class="caret"></b></a>
+          <span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['naam']; ?> <b class="caret"></b></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="?pagina=help"><span class="glyphicon glyphicon-user"></span>Help</a></li>
             <li><a href="?pagina=instellingen"><span class="glyphicon glyphicon-cog"></span>Instellingen</a></li>
