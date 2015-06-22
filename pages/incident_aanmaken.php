@@ -1,4 +1,4 @@
-<h1 class="page-header">Incident aanmaken <small><span class="label label-primary">INCIDENT-15062015-003</span></small></h1>
+<h1 class="page-header">Incident aanmaken <small><span class="label label-primary"><?php echo cmdb_tag(1); ?></span></small></h1>
 <div class="btn-group btn-group-lg" role="group" aria-label="Incident aanmaken-beheer">
   <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-saved"></span></button>
   <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>

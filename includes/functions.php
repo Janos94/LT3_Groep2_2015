@@ -69,6 +69,57 @@
 		<?php
 	}
 	
+	// Maak CMDB Tag aan 
+	function cmdb_tag($categorie)
+	{
+		include 'db.php';
+		$query = "SELECT * FROM `incidenten` WHERE CATEGORIE=".$categorie." AND DATUM=CURDATE() ORDER BY CATEGORIE DESC";
+		$rows = mysqli_num_rows(mysqli_query($db, $query));
+		if ($rows == 0)
+		{
+			switch ($categorie)
+			{
+				case 1: 
+					$tag = "INCIDENTEN";
+					break; 
+				case 2: 
+					$tag = "WIJZIGING";
+					break; 
+				case 3: 
+					$tag = "PROBLEEM";
+					break;
+			}
+			$today = date("dmY"); 
+			$count = 1;
+			$count = sprintf("%03d", $count);
+			$new_tag = $tag."-".$today."-".$count;
+			return $new_tag;
+		} 
+		else 
+		{
+			switch ($categorie)
+			{
+				case 1: 
+					$tag = "INCIDENTEN";
+					break; 
+				case 2: 
+					$tag = "WIJZIGING";
+					break; 
+				case 3: 
+					$tag = "PROBLEEM";
+					break;
+			}
+			$today = date("dmY"); 
+			$count = mysqli_fetch_assoc(mysqli_query($db, $query));
+			$count = $count['CMDB_ID'];
+			$count = substr($count, -3); 
+			$count++;
+			$new_tag = $tag."-".$today."-".$count;			
+			return $new_tag;
+		}	
+	}
+	
+	// Haal de rollen op bij de invoerde user id
 	function rollen($id){
 		include 'db.php'; 
 		$query = "SELECT * FROM gebruikers WHERE Medewerker_ID=".$id.";";
