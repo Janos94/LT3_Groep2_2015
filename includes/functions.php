@@ -73,7 +73,7 @@
 	function cmdb_tag($categorie)
 	{
 		include 'db.php';
-		$query = "SELECT * FROM `incidenten` WHERE CATEGORIE=".$categorie." AND DATUM=CURDATE() ORDER BY CATEGORIE DESC";
+		$query = "SELECT * FROM `incidenten` WHERE CATEGORIE=".$categorie." AND DATUM=CURDATE() ORDER BY ID DESC";
 		$rows = mysqli_num_rows(mysqli_query($db, $query));
 		if ($rows == 0)
 		{
@@ -113,25 +113,26 @@
 			$count = mysqli_fetch_assoc(mysqli_query($db, $query));
 			$count = $count['CMDB_ID'];
 			$count = substr($count, -3); 
-			$count++;
+			$count = $count + 1;
+			$count = sprintf("%03d", $count);
 			$new_tag = $tag."-".$today."-".$count;			
 			return $new_tag;
 		}	
 	}
 	
-	// Haal de rollen op bij de invoerde user id
+	/* Haal de rollen op bij de invoerde user id
 	function rollen($id){
 		include 'db.php'; 
 		$query = "SELECT * FROM gebruikers WHERE Medewerker_ID=".$id.";";
 		$get_query = mysqli_query($db, $query);
 		$user = mysqli_fetch_assoc($get_query);
 		echo $user[$kolom];
-	}
+	}*/
 	
 	// Functie voor het ophalen van gegevens van een bepaaalde user, verder aangeven welke kolom gereturned moet worden. 
 	function haal_user_op($id, $kolom){
 		include 'db.php'; 
-		$query = "SELECT * FROM gebruikers WHERE Medewerker_ID=".$id.";";
+		$query = "SELECT * FROM gebruikers JOIN locaties ON gebruikers.locaties_id=locaties.id WHERE Medewerker_ID=".$id.";";
 		$get_query = mysqli_query($db, $query);
 		$user = mysqli_fetch_assoc($get_query);
 		echo $user[$kolom];
@@ -143,6 +144,75 @@
 		$query = "SELECT * FROM `gebruikers_has_rechten` WHERE gebruikers_Medewerker_ID=".$id;
 		$rol = mysqli_fetch_assoc(mysqli_query($db, $query));
 		return $rol['rechten_Rechten_ID'];
+	}
+	
+	function haal_cmdb_op($id, $kolom)
+	{
+		include 'db.php'; 
+		$query = "SELECT * FROM incidenten WHERE ID=".$id;
+		$cmdb = mysqli_fetch_assoc(mysqli_query($db, $query));
+		return $cmdb[$kolom];
+	}
+	
+	function bepaal_status($status)
+	{
+		switch ($status)
+		{
+			case 1: 
+				$status = "1 - Open";
+				return $status; 
+				break; 
+			case 2: 
+				$status = "2 - In wacht";
+				return $status; 
+				break; 
+			case 3: 
+				$status = "3 - In behandeling";
+				return $status; 
+				break; 
+			case 4: 
+				$status = "4 - Gesloten";
+				return $status; 
+				break; 
+			case 5: 
+				$status = "5 - Opgelost";
+				return $status; 
+				break; 
+		}
+	}
+	
+	function bepaal_oplostijd($prio)
+	{
+		if (!isset($prio)) { $prio = 6; }
+		switch ($prio){
+			case 1: 
+				$newTime = date("d-m-Y H:i",strtotime(date("d-m-Y H:i")." +2 days"));
+				break;
+			case 2: 
+				$newTime = date("d-m-Y H:i",strtotime(date("d-m-Y H:i")." +1 days"));
+				break;
+			case 3: 
+				$newTime = date("d-m-Y H:i",strtotime(date("d-m-Y H:i")." +8 hours"));
+				break;
+			case 4: 
+				$newTime = date("d-m-Y H:i",strtotime(date("d-m-Y H:i")." +4 hours"));
+				break;
+			case 5: 
+				$newTime = date("d-m-Y H:i",strtotime(date("d-m-Y H:i")." +1 hours"));
+				break;
+			case 6: 
+				$newTime = date("d-m-Y H:i",strtotime(date("d-m-Y H:i")." +1 seconds"));
+				break;
+		}
+		?><input type="text" class="form-control" value="<?php echo $newTime; ?>" disabled><?php
+	}
+	
+	function haal_component_op($id, $kolom)
+	{
+		include 'db.php';
+		$query = "SELECT * FROM componenten JOIN soorten ON componenten.soorten_ID=soorten.ID JOIN locaties ON componenten.locaties_id=locaties.ID WHERE soorten_ID BETWEEN 41 AND 49 AND COMPONENT_ID = '".$id."';";
+		$component = mysqli_fetch_assoc(mysqli_query($db, $query));
+		return $component[$kolom];
 	}
 	
 	function haal_locatie_op($id)

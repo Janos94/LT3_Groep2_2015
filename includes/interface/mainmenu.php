@@ -15,8 +15,9 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-plus"></span></a>
           <ul class="dropdown-menu" role="menu">
             <?php menuItem("Incident aanmaken"); ?>
-            <?php menuItem("Wijziging aanmaken"); ?>
             <?php menuItem("Component aanmaken"); ?>
+            <?php menuItem("Wijziging software"); ?>
+            <?php menuItem("Wijziging component"); ?>
           </ul>
         </li>    
         <?php menuItem("Overzicht"); ?>
@@ -24,8 +25,6 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">CMDB<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <?php menuItem("Incidenten"); ?>
-            <?php menuItem("Problemen"); ?>
-            <?php menuItem("Configuratie"); ?>
           </ul>
         </li>     
          
@@ -41,9 +40,6 @@
         </li>
         
       </ul>
-      <form class="navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Zoeken naar...">
-      </form>
     </div>
   </div>
 </nav>

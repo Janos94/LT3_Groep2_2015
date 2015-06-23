@@ -29,8 +29,15 @@
 			$_SESSION['naam'] = $data['Achternaam'].", ".$data['Voornaam'];
 			
 			// Doorsturen naar beheerpagina
-			header('location: ../?pagina=overzicht');
-			exit();
+			if ($_SESSION['rights'] == 1){
+				header('location: ../selfservicedesk/index.php');
+				exit();
+			}
+			else if($_SESSION['rights'] >= 2)
+			{
+				header('location: ../?pagina=overzicht');
+				exit();
+			}			
 		} else { header('location: ?status=mislukt'); }
 		
 	}	

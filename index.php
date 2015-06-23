@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  if(!isset($_SESSION['username']) || (2 >= $_SESSION['rights'])){
+  if(!isset($_SESSION['username']) || (1 >= $_SESSION['rights'])){
     header('location: ../../inloggen/?status=rights');
     exit();
   }
