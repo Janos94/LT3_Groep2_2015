@@ -1,261 +1,204 @@
-<h1 class="page-header">Incident aanmaken <small><span class="label label-primary">INCI-15062015-003</span></small></h1>
+<h1 class="page-header">Configuratie Management</h1>
 <div class="btn-group btn-group-lg" role="group" aria-label="Incident aanmaken-beheer">
-  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-saved"></span></button>
-  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
+ <!-- 
+	<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-saved"></span></button>
+	<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
+ -->
 </div>
 <br><br>
-<div class="row incident_field">  
-<!-- Aanmelder incident -->
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 incident_field">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Aanmelder</h3>
-    </div>
-    <div class="panel-body">
-        <!-- Medewerkers nummer --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Medewerkers nr</div>
-            <input type="text" class="form-control" id="medewerker_id" placeholder="4958245">
-          </div>
-        </div>
-        <!-- Voornaam --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Voornaam</div>
-            <input type="text" class="form-control" id="voornaam" placeholder="Vb. Peter" disabled>
-          </div>
-        </div>
-        <!-- Achternaam --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Achternaam</div>
-            <input type="text" class="form-control" id="achternaam" placeholder="Vb. de Vries" disabled>
-          </div>
-        </div>
-        <!-- Telefoon --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Telefoon</div>
-            <input type="tel" class="form-control" id="telefoon" placeholder="Vb. 0505491433" disabled>
-          </div>
-        </div>
-        <!-- Email --> 
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputAmount">E-Mail</label>
-          <div class="input-group">
-            <div class="input-group-addon">E-Mail</div>
-            <input type="email" class="form-control" id="email" placeholder="p.devries@hondsrug.nl" disabled>
-          </div>
-        </div> 
-        <!-- Locatie aanmelder --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Locatie</div>
-            <input type="text" class="form-control" id="locatie" placeholder="Borger" disabled>
-          </div>
-        </div>       
-        
-    </div>
-  </div>
-</div>
+	<!---------------------------------------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------------------------------------->
+	<!------------------------------------------ SOEP CODE, GEEN TIJD OM 'MOOI' TE MAKEN ----------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------------------------------------->
+	
+<?php
+	
+	include 'includes/functions_marcel.php';
+	
+	## Kijkt of er op de knop Opslaan gedrukt is.
+	if(isset($_POST['invoeren_component'])){
+	
+	## Zet error op empty
+	$Error = '';
+	
+	## Kijkt of er iets ingevuld is bij component_ID	
+	if (empty($_POST['Component_ID'])){
+		$Error .= "Er is niets ingevuld bij Component_ID! </br>";
+	}
+	$Component_ID = $_POST['Component_ID'];
+	$Jaar = $_POST['jaar'];
+	$Merk = $_POST['merk'];
+	$Besturingssystemen = $_POST['besturingssystemen'];
+	$Leverancier = $_POST['leverancier'];
+	$Soort = $_POST['soort'];
+	$Locatie = $_POST['locatie'];
+	
+	
+	$controle_query = "select * from componenten WHERE COMPONENT_ID = '{$_POST['Component_ID']}';";
+				$get_controle_query = mysqli_query($db, $controle_query);
+				$result = mysqli_num_rows($get_controle_query);
+				## hierboven wordt ingevoerde component ID opgehaald uit de database om te kijken of hij bestaat of niet.
+				## hieronder wordt gekeken of het resultaat leeg is. Als het leeg is dan wordt component toegevoegd. Als het niet leeg is wordt het formulier laten zien.
+				if ($result > 0){
+		$Error .= "Dit component_ID bestaat al, gelieve opnieuw proberen. </br>";
+	}
+	## Kijkt of er errors aanwezig zijn, zoja laat deze zien. Zoniet: verwerk gegevens in database.
+	
+	if ($Error != '' || $Error == ' '){
+		 
+		echo "<H2> {$Error} </H2>";	
+		?>
+		<form action = '' method = 'POST'>
+		<?php
+		
+		}else{
+		?>
+			<H2> Component succesvol toegevoegd aan de database.</H2>
+			<?php
+		
+			
+			add_component($Component_ID, $Jaar, $Merk, $Besturingssystemen, $Leverancier, $Soort, $Locatie);
+			
+			?>
+			
+			
+		<?php			
+		}
+	}else{
+	
 
-<!-- Type incident -->
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 incident_field">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Soort melding/incident</h3>
-    </div>
-    <div class="panel-body">
-        <!-- Categorie --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Aangemeld via</div>
-            <select class="form-control">
-              <option>Telefoon</option>
-              <option>E-mail</option>
-              <option>Mondeling</option>
-            </select>
-          </div>
-        </div>
-        <!-- Categorie --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Soort melding/incident</div>
-            <select class="form-control">
-              <option>Storing</option>
-              <option>Probleem</option>
-              <option>Opmerking</option>
-            </select>
-          </div>
-        </div>
-        <!-- Categorie --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Impact/urgentie</div>
-            <select class="form-control">
-              <option>1 - Gering</option>
-              <option>2 - Laag</option>
-              <option>3 - Middel</option>
-              <option>4 - Hoog</option>
-              <option>5 - Blokkerend</option>
-            </select>
-          </div>
-        </div>       
-        
-    </div>
-  </div>
-</div>
+?>	
+	<!-- Welkom --->
 
-<!-- Object type -->
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 incident_field">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Object</h3>
-    </div>
-    <div class="panel-body">
-        <!-- Object type --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Object type</div>
-            <select class="form-control">
-              <option>Werkstation</option>
-              <option>Server</option>
-              <option>Modem</option>
-              <option>Router</option>
-              <option>Switch</option>
-              <option>Printer</option>
-              <option>Firewall</option>
-            </select>
-          </div>
-        </div>
-        <!-- Object-id --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Object-ID</div>
-            <select class="form-control">
-              <option>GSV-003</option>
-              <option>MDM-005</option>
-              <option>SRV-2359</option>
-            </select>
-          </div>
-        </div>        
-        <!-- Locatie --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Locatie</div>
-            <input type="text" class="form-control" id="locatie" placeholder="Gasselte L.003">
-          </div>
-        </div>        
-        
-    </div>
-  </div>
-</div>
-
-<!-- Behandelaar -->
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 incident_field">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Verwerking / Behandelaar</h3>
-    </div>
-    <div class="panel-body">
-        <div class="col-xs-12 col-sm-6 incident_field">
-        <!-- Object type --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Behandelaar</div>
-            <select class="form-control">
-              <option>Osinga, JJ</option>
-              <option>Oostebring, M</option>
-              <option>de Ruig, B</option>
-              <option>Oosterveen, O</option>
-            </select>
-          </div>
-        </div> 
-        </div>
-        
-        <div class="col-xs-12 col-sm-6 incident_field">
-        <!-- Object type --> 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">Status</div>
-            <select class="form-control">
-              <option>Open</option>
-              <option>In wacht</option>
-              <option>In behandeling</option>
-              <option>Gesloten</option>
-              <option>Opgelost</option>
-            </select>
-          </div>
-        </div> 
-        </div>        
-               
-    </div>
-  </div>
- </div>
-</div>
-
-<!----------->
-<div class="row incident_field">
-<!-- Beschrijving -->
-<div class="col-xs-12 col-sm-6 incident_field">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Beschrijving</h3>
-    </div>
-    <div class="panel-body">
-          
-    <!-- Korte omschrijving --> 
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-addon">Korte omschrijving</div>
-        <input type="text" class="form-control" id="korte_omschrijving" placeholder="Bv. Beeldscherm werkt niet">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group"> 
-        <div class="input-group-addon">Probleem</div>
-        <textarea class="form-control" rows="5"></textarea>
-      </div>    
-    </div>     
-  </div>
-</div>
-</div>
-  
-<!-- Tijdlijn -->
-<div class="col-xs-12 col-sm-6 timeline">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Tijdlijn</h3>
-    </div>
-    <div class="panel-body">
-      <div class="qa-message-list" id="wallmessages">					
-					<div class="message-item" id="m1">
-						<div class="message-inner">
-							<div class="message-head clearfix">
-								<div class="avatar pull-left"><img src="../images/profielfotos/janosinga.png"></div>
-								<div class="user-detail">
-									<h5 class="handle">Jan Osinga</h5>
-									<div class="post-meta">
-										<div class="asker-meta">
-											<span class="qa-message-what"></span>
-											<span class="qa-message-when">
-												<span class="qa-message-when-data">16-06-2015 14:49</span>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="qa-message-content">
-								Dit incident kan snel worden opgelost met een handleiding...
-							</div>
-					</div></div>					
-				</div>    
-  </div>
-</div>
-</div>
-<div class="row aanmaakdatum">
-	<div class="col-xs-12 col-sm-12 aanmaakdatum">
-	<div class="well well-sm"><center>Aangemaakt op: 16-06-2015 14:00 | Aangepast op: 16-06-2015 14:15</center></div>
+	<H1> Nieuw hardware component toevoegen. </H1>	
+	<div class="row incident_field"> 
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 incident_field">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+	<!-- Form type --->
+	<form action = '' method = 'POST'>
+	
+	<!-- Component naam --->
+	Component naam: <input type = 'text' name = 'Component_ID' placeholder = 'Bijvoorbeeld WS01'> 
 	</div>
+    </div>
+				
+	<!-- Jaar van aanschaf --->
+	<div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">Jaar van aanschaf: </div><select class="form-control" name = 'jaar'>
+	<!-- For loop om jaren te kunnen kiezen --->
+	<?php aanschaf_jaar(1970, 2016); ?>
+	</select>
+	</div>
+	</div>
+		
+						
+	<!-- merk --->
+	<div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">Merk: </div><select class="form-control" name = 'merk'>
+	
+	<?php 
+	
+	$query = "Select Naam from merken";
+	$get_query = mysqli_query($db, $query);
+	while($row = mysqli_fetch_assoc($get_query)){
+	?>
+		<option value = '<?php echo $row['Naam']; ?>'><?php echo $row['Naam']; ?></option>
+	<?php
+	}
+	?>
+	</select>	
+	</div>
+	</div>				
+	
+	<!-- Besturingssysteem --->
+	<div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">Besturingssysteem: </div><select class="form-control" name = 'besturingssystemen'>
+	
+	<?php 
+	$query = "Select Besturingssysteem from besturingssysteem";
+	$get_query = mysqli_query($db, $query);
+	while($row = mysqli_fetch_assoc($get_query)){
+	
+	?>		
+		<option value = '<?php echo $row['Besturingssysteem']; ?>'><?php echo $row['Besturingssysteem']; ?></option>
+	<?php
+	}
+	?>
+	</select>
+	</div>
+	</div>
+	
+	<!-- Leverancier --->
+	<div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">Leverancier: </div><select class="form-control" name = 'leverancier'>
+	
+	<?php 
+	$query = "Select Naam from leveranciers";
+	$get_query = mysqli_query($db, $query);
+	while($row = mysqli_fetch_assoc($get_query)){
+		
+	?>		
+		<option value = '<?php echo $row['Naam']; ?>'><?php echo $row['Naam']; ?></option>
+	<?php
+	}
+	?>
+	</select>
+	</div>
+	</div>
+		
+	<!-- Soort --->
+	<div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">Soort: </div><select class="form-control" name = 'soort'>
+	
+	<?php 
+	$query = "Select Categorie from soorten";
+	$get_query = mysqli_query($db, $query);
+	while($row = mysqli_fetch_assoc($get_query)){
+		
+	?>		
+		<option value = '<?php echo $row['Categorie']; ?>'><?php echo $row['Categorie']; ?></option>
+	<?php
+	}
+	?>
+	</select>
+	</div>
+	</div>
+		
+	<!-- Locatie --->
+	<div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">Locatie: </div><select class="form-control" name = 'locatie'>
+	
+	<?php 
+	$query = "Select Plaats from locaties";
+	$get_query = mysqli_query($db, $query);
+	while($row = mysqli_fetch_assoc($get_query)){
+		
+	?>		
+		<option value = '<?php echo $row['Plaats']; ?>'><?php echo $row['Plaats']; ?></option>
+	<?php
+	}
+	?>
+	</select>
+	</div>
+	</div>
+		
+	
+	<input type = 'submit' value = 'Opslaan' name = 'invoeren_component'>
+	</form>
+
+<?php
+} 
+?>
+ 
+</div>
 </div>
